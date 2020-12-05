@@ -41,3 +41,27 @@ print(classification_report(y_test, prediction))
 
 # -----------------  非线性逻辑回归  -----------------
 # ref：https://www.jb51.net/article/188355.htm
+import numpy as np
+from sklearn import linear_model
+from sklearn.datasets import make_gaussian_quantiles
+from sklearn.preprocessing import PolynomialFeatures
+
+# 生成正太分布数据，500个样本，2个特征，2类
+x_data, y_data = make_gaussian_quantiles(n_samples=500, n_features=2, n_classes=2)
+
+plt.scatter(x_data[:, 0], x_data[:, 1], c=y_data)
+plt.show()
+
+# 进行特征的构造
+poly_reg = PolynomialFeatures(degree=5)
+# 特征处理
+x_poly = poly_reg.fit_transform(x_data)
+
+# 逻辑回归模型
+logistic = linear_model.LogisticRegression()
+logistic.fit(x_poly, y_data)
+
+acc = logistic.score(x_poly, y_data)
+print("score is :%s" % acc)
+prediction = logistic.predict(x_poly)
+print(classification_report(y_data, prediction))
