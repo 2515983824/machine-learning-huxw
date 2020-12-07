@@ -60,6 +60,7 @@ if __name__ == "__main__":
     print(79 * '_')
 
 
+
 # ---------------------------------------- 可视化 ----------------------------------------
     reduced_data = PCA(n_components=2).fit_transform(data)
     # fit_transform得到是用降维度处理后的数据
